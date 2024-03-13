@@ -3,7 +3,7 @@ function authenticate() {
     var passwordInput = document.getElementById("password").value;
 
     // Preloaded set of credentials
-    var validUsernames = ["sg22331", "sg22345"];
+    var validUsernames = ["sg22331", "sg22345","sg22334"];
     var validPassword = "sukirti";
 
     // Check if username and password match the preloaded set
@@ -22,4 +22,15 @@ function authenticate() {
     } else {
         alert("Invalid username or password.");
     }
+}
+function logout(){
+    setTimeout(() => {
+        window.location.href="index.html";
+    }, 1000);
+    alert("logout successfull");
+}
+function cart(){
+    setTimeout(()=>{
+        window.location.href="cart.html";
+    })
 }
