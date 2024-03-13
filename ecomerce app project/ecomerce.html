@@ -1026,12 +1026,13 @@ footer .copy-right {
                 <li><a href="#">home</a></li>
                 <li><a href="#products">products</a></li>
                 <li><a href="#collections">collections</a></li>
-                <li><a href="#blog">blog</a></li>
+				<li><a href="#logout"  onclick="logout()">logout</a></li>
                 <li><a href="#contact">contact</a></li>
+				
             </ul>
             <div class="cart nav-icon nav-common"><img
                     src="https://res.cloudinary.com/de8cuyd0n/image/upload/v1520412544/E-commerce%20landing%20page/icons/shopping_cart_1x.png"
-                    alt="shopping-cart"></div>
+                    alt="shopping-cart" onclick="cart()"></div>
             <div class="menu nav-icon nav-common"><img
                     src="https://res.cloudinary.com/de8cuyd0n/image/upload/v1520412543/E-commerce%20landing%20page/icons/menu_1x.png"
                     alt="hamburger-menu"></div>
@@ -1079,8 +1080,10 @@ footer .copy-right {
                 <figure> <img
                         src="https://res.cloudinary.com/de8cuyd0n/image/upload/v1520412551/E-commerce%20landing%20page/products-showcase/product-1-img_3x.jpg"
                         alt="product-image">
+						
                     <figcaption>cold fashion</figcaption>
                     <figcaption>$ 56.00</figcaption>
+					<button class="add-to-cart">Add to Cart</button>
                 </figure>
             </div>
             <div class="product product-2">
@@ -1089,6 +1092,7 @@ footer .copy-right {
                         alt="product-image">
                     <figcaption>women fashion</figcaption>
                     <figcaption>$ 84.00</figcaption>
+					<button class="add-to-cart">Add to Cart</button>
                 </figure>
             </div>
             <div class="product product-3">
@@ -1097,6 +1101,7 @@ footer .copy-right {
                         alt="product-image">
                     <figcaption>women fashion</figcaption>
                     <figcaption>$ 48.00</figcaption>
+					<button class="add-to-cart">Add to Cart</button>
                 </figure>
             </div>
             <div class="product product-4">
@@ -1105,6 +1110,7 @@ footer .copy-right {
                         alt="product-image">
                     <figcaption>men fashion</figcaption>
                     <figcaption>$ 89.00</figcaption>
+					<button class="add-to-cart">Add to Cart</button>
                 </figure>
             </div>
         </div>
@@ -1184,5 +1190,40 @@ footer .copy-right {
                 src="https://res.cloudinary.com/de8cuyd0n/image/upload/v1520412541/E-commerce%20landing%20page/icons/back_-_top_1x.png"
                 alt="back to top"></a> </div>
 </body>
+<script src="authenticate.js"> 
+	document.addEventListener("DOMContentLoaded", function () {
+		const addToCartButtons = document.querySelectorAll(".add-to-cart");
 
+		addToCartButtons.forEach(button => {
+			button.addEventListener("click", function () {
+				const product = this.closest(".product");
+				const productName = product.querySelector("figcaption:nth-of-type(1)").innerText;
+				const productPrice = product.querySelector("figcaption:nth-of-type(2)").innerText;
+
+				// Create a new object representing the product
+				const newItem = {
+					name: productName,
+					price: productPrice
+				};
+
+				// Check if cart already exists in local storage
+				let cart = localStorage.getItem("cart");
+				if (!cart) {
+					cart = [];
+				} else {
+					cart = JSON.parse(cart);
+				}
+
+				// Add the new item to the cart
+				cart.push(newItem);
+
+				// Save the updated cart back to local storage
+				localStorage.setItem("cart", JSON.stringify(cart));
+
+				// Redirect to the cart page
+				window.location.href = "cart.html";
+			});
+		});
+	})
+	 </script>
 </html>
